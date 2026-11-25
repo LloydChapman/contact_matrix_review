@@ -1,5 +1,6 @@
 # Load packages
 library(socialmixr)
+library(contactsurveys)
 library(data.table)
 library(lubridate)
 library(jsonlite)
@@ -11,7 +12,7 @@ source("clean_survey.R")
 source("load_survey2.R")
 
 # Download CoMiX data
-comix_survey <- download_survey("https://zenodo.org/records/13684044")
+comix_survey <- download_survey("https://doi.org/10.5281/zenodo.13684044")
 
 remove_X_col <- function(file){
     x <- fread(file)
@@ -29,9 +30,9 @@ change_country_name <- function(file, old_country, new_country){
     fwrite(x, file = file)
 }
 
-remove_X_col(comix_survey[3])
-remove_X_col(comix_survey[5])
-change_country_name(comix_survey[5], "uk", "GB")
+remove_X_col(comix_survey[8])
+remove_X_col(comix_survey[4])
+change_country_name(comix_survey[4], "uk", "GB")
 
 # Load CoMix survey data
 # comix <- load_survey(comix_survey, participant.age.column = "part_age") # doesn't work as part_age_exact is empty
